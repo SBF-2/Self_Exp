@@ -1,0 +1,35 @@
+Epoch 34000: Loss = 1029.256958, Best = 1029.255981
+Epoch 34000 评估: 平均损失=1029.351987, 保存图片=8张
+Epoch 34500: Loss = 1029.254761, Best = 1029.254639
+Epoch 34500 评估: 平均损失=1029.360964, 保存图片=8张
+Epoch 35000: Loss = 1029.261108, Best = 1029.254517
+Epoch 35000 评估: 平均损失=1029.402427, 保存图片=8张
+保存检查点: train_models_attention/overfit_trained_models/overfit_epoch_35000.pth
+Epoch 35500: Loss = 1029.260010, Best = 1029.254272
+Epoch 35500 评估: 平均损失=1029.301236, 保存图片=8张
+Epoch 36000: Loss = 1029.269165, Best = 1029.254272
+Epoch 36000 评估: 平均损失=1029.359270, 保存图片=8张
+Epoch 36500: Loss = 1029.272705, Best = 1029.253662
+Epoch 36500 评估: 平均损失=1029.464414, 保存图片=8张
+Epoch 37000: Loss = 1029.265381, Best = 1029.252930
+Epoch 37000 评估: 平均损失=1029.388718, 保存图片=8张
+Epoch 37500: Loss = 1029.254517, Best = 1029.251831
+Epoch 37500 评估: 平均损失=1029.437024, 保存图片=8张
+保存检查点: train_models_attention/overfit_trained_models/overfit_epoch_37500.pth
+Epoch 38000: Loss = 1029.273804, Best = 1029.251831
+Epoch 38000 评估: 平均损失=1029.464041, 保存图片=8张
+Epoch 38500: Loss = 1029.287231, Best = 1029.251831
+Epoch 38500 评估: 平均损失=1029.382016, 保存图片=8张
+Epoch 39000: Loss = 1029.401123, Best = 1029.251343
+Epoch 39000 评估: 平均损失=1029.440837, 保存图片=8张
+Epoch 39500: Loss = 1029.266846, Best = 1029.251099
+Epoch 39500 评估: 平均损失=1029.561640, 保存图片=8张
+Epoch 40000: Loss = 1029.267944, Best = 1029.251099
+Epoch 40000 评估: 平均损失=1029.296559, 保存图片=8张
+保存检查点: train_models_attention/overfit_trained_models/overfit_epoch_40000.pth
+
+训练达到最大轮数限制
+最佳训练损失: 1029.251099
+最终评估损失: 1029.296559
+模型保存: train_models_attention/overfit_trained_models/overfit128_max_epochs.pth
+保存的对比图总数: 8
