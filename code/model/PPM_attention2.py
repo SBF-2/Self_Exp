@@ -5,6 +5,7 @@ import torch.nn.functional as F
 from torch import nn
 import os
 import math
+from typing import Optional
 
 # 假设 .residual 包含 DownBlock2d 和 UpBlock2d。
 # 为了独立测试，如果不可用，我们定义增强版本。
@@ -535,6 +536,125 @@ class EnhancedPredictiveRepModel(nn.Module):
         optimizer.step()
 
         return loss.item()
+
+    def train_on_batch_advanced(self, obs1_input_b_l_c_h_w: torch.Tensor,
+                           actions_input_b_l: torch.Tensor,
+                           obs2_target_b_l_c_h_w: torch.Tensor,
+                           optimizer: torch.optim.Optimizer,
+                           scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None,
+                           scaler: Optional[torch.cuda.amp.GradScaler] = None,
+                           use_mixed_precision: bool = False,
+                           gradient_clip_norm: float = 1.0,
+                           accumulation_steps: int = 1,
+                           is_accumulation_step: bool = False) -> float:
+        # 单个批次上训练模型，支持梯度累积和混合精度训练
+        self.train()
+        # Only zero gradients at the beginning of accumulation cycle
+        if not is_accumulation_step:
+            optimizer.zero_grad()
+
+        if use_mixed_precision and scaler is not None:
+            # Mixed precision training
+            with torch.cuda.amp.autocast():
+                # Forward pass
+                _, predicted_obs2_raw_b_l_c_hd_wd = self.forward(obs1_input_b_l_c_h_w, actions_input_b_l)
+
+                # Process predictions and targets
+                predicted_obs2_processed_b_c_hd_wd = predicted_obs2_raw_b_l_c_hd_wd.squeeze(1)
+                obs2_target_for_loss_b_c_h_w = obs2_target_b_l_c_h_w.squeeze(1)
+
+                # Size matching
+                if predicted_obs2_processed_b_c_hd_wd.shape[2:] != obs2_target_for_loss_b_c_h_w.shape[2:]:
+                    predicted_obs2_resized = F.interpolate(
+                        predicted_obs2_processed_b_c_hd_wd,
+                        size=obs2_target_for_loss_b_c_h_w.shape[2:],
+                        mode='bilinear',
+                        align_corners=False
+                    )
+                else:
+                    predicted_obs2_resized = predicted_obs2_processed_b_c_hd_wd
+
+                # Normalize to [0, 1] range
+                predicted_norm = (predicted_obs2_resized + 1) / 2.0
+                target_norm = (obs2_target_for_loss_b_c_h_w + 1) / 2.0
+
+                # Convert to grayscale
+                gray_weights = torch.tensor([0.2989, 0.5870, 0.1140],
+                                            device=predicted_norm.device).view(1, -1, 1, 1)
+                predicted_gray = (predicted_norm * gray_weights).sum(dim=1, keepdim=True)
+                target_gray = (target_norm * gray_weights).sum(dim=1, keepdim=True)
+
+                # Compute loss and scale for accumulation
+                loss = F.mse_loss(predicted_gray, target_gray)
+                loss = loss / accumulation_steps
+
+            # Backward pass with scaling
+            scaler.scale(loss).backward()
+
+            # Only step optimizer at the end of accumulation cycle
+            if not is_accumulation_step:
+                # Gradient clipping
+                scaler.unscale_(optimizer)
+                torch.nn.utils.clip_grad_norm_(self.parameters(), max_norm=gradient_clip_norm)
+                
+                # Optimizer step
+                scaler.step(optimizer)
+                scaler.update()
+                
+                # Update learning rate
+                if scheduler is not None:
+                    scheduler.step()
+
+        else:
+            # Standard precision training
+            # Forward pass
+            _, predicted_obs2_raw_b_l_c_hd_wd = self.forward(obs1_input_b_l_c_h_w, actions_input_b_l)
+
+            # Process predictions and targets (same as above)
+            predicted_obs2_processed_b_c_hd_wd = predicted_obs2_raw_b_l_c_hd_wd.squeeze(1)
+            obs2_target_for_loss_b_c_h_w = obs2_target_b_l_c_h_w.squeeze(1)
+
+            # Size matching
+            if predicted_obs2_processed_b_c_hd_wd.shape[2:] != obs2_target_for_loss_b_c_h_w.shape[2:]:
+                predicted_obs2_resized = F.interpolate(
+                    predicted_obs2_processed_b_c_hd_wd,
+                    size=obs2_target_for_loss_b_c_h_w.shape[2:],
+                    mode='bilinear',
+                    align_corners=False
+                )
+            else:
+                predicted_obs2_resized = predicted_obs2_processed_b_c_hd_wd
+
+            # Normalize to [0, 1] range
+            predicted_norm = (predicted_obs2_resized + 1) / 2.0
+            target_norm = (obs2_target_for_loss_b_c_h_w + 1) / 2.0
+
+            # Convert to grayscale
+            gray_weights = torch.tensor([0.2989, 0.5870, 0.1140],
+                                        device=predicted_norm.device).view(1, -1, 1, 1)
+            predicted_gray = (predicted_norm * gray_weights).sum(dim=1, keepdim=True)
+            target_gray = (target_norm * gray_weights).sum(dim=1, keepdim=True)
+
+            # Compute loss and scale for accumulation
+            loss = F.mse_loss(predicted_gray, target_gray)
+            loss = loss / accumulation_steps
+
+            # Backward pass
+            loss.backward()
+
+            # Only step optimizer at the end of accumulation cycle
+            if not is_accumulation_step:
+                # Gradient clipping
+                torch.nn.utils.clip_grad_norm_(self.parameters(), max_norm=gradient_clip_norm)
+                
+                # Optimizer step
+                optimizer.step()
+                
+                # Update learning rate
+                if scheduler is not None:
+                    scheduler.step()
+
+        return loss.item() * accumulation_steps  # Return unscaled loss for logging
 
     def evaluate_on_batch(self, obs1_input_b_l_c_h_w: torch.Tensor,
                           actions_input_b_l: torch.Tensor,

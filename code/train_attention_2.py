@@ -7,7 +7,7 @@ from torch.utils.tensorboard import SummaryWriter
 from model.PPM_attention2 import EnhancedPredictiveRepModel
 from env.AtariEnv_random import AtariEnvManager
 
-# --- Enhanced Configuration ---
+# --- Enhanced Configuration (Keeping original settings) ---
 # Environment parameters
 NUM_GAMES_TO_SELECT_FROM = 3  # Number of unique games to potentially use
 NUM_ENVS = 3  # Increased batch size for better training
@@ -22,18 +22,18 @@ ENCODER_LAYERS = [2, 3, 4, 3]  # Deeper encoder: [layer1, layer2, layer3, layer4
 DECODER_LAYERS = [2, 2, 2, 1]  # Decoder configuration
 USE_SKIP_CONNECTIONS = True  #可以跳过某些层直接传递
 
-# Enhanced Training parameters
+# Enhanced Training parameters (Keeping original settings)
 LEARNING_RATE = 1e-4
 WEIGHT_DECAY = 1e-5     #正则化参数，用来防止模型过拟合
 NUM_TRAINING_STEPS = 200    #20000
 SEQ_LEN = 1  # Sequence length (model expects B, L, C, H, W)
 PRINT_INTERVAL = 100
 SAVE_INTERVAL = 1000
-MODEL_SAVE_DIR = "/Users/feisong/Desktop/self-experience/code/Output/checkpoint/enhanced_trained_models_attention"
-LOG_DIR = "/Users/feisong/Desktop/self-experience/code/Output/log"
+MODEL_SAVE_DIR = "Output/checkpoint/enhanced_trained_models_attention"
+LOG_DIR = "Output/log/Episode/enhanced_attention_logs"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# Advanced training settings
+# Advanced training settings (Keeping original)
 GRADIENT_CLIP_NORM = 1.0   #梯度裁剪
 WARMUP_STEPS = 1000  #1-1000 lr从0慢慢增加到target_lr
 USE_MIXED_PRECISION = True  # 混合精度训练
@@ -170,10 +170,10 @@ def main():
     ).to(DEVICE)
 
     # Calculate and print model parameters
-    # total_params = sum(p.numel() for p in model.parameters())
-    # trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
-    # print(f" Total parameters: {total_params:,}")
-    # print(f" Trainable parameters: {trainable_params:,}")
+    total_params = sum(p.numel() for p in model.parameters())
+    trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    print(f" Total parameters: {total_params:,}")
+    print(f" Trainable parameters: {trainable_params:,}")
 
     # --- Initialize Optimizer and Scheduler ---
     optimizer = optim.AdamW(
@@ -203,11 +203,11 @@ def main():
     # Training state
     start_step = 1
 
-    # Optional: Load from checkpoint
-    # checkpoint_path = "path/to/checkpoint.pth"
-    # if os.path.exists(checkpoint_path):
-    #     start_step, _ = load_checkpoint(model, optimizer, scheduler, scaler, checkpoint_path)
-    #     start_step += 1
+    # Clean up old log files
+    log_files = ['enhanced_loss.csv', 'enhanced_training.log']
+    for log_file in log_files:
+        if os.path.exists(log_file):
+            os.remove(log_file)
 
     for step in range(start_step, NUM_TRAINING_STEPS + 1):
         step_start_time = time.time()
@@ -237,109 +237,74 @@ def main():
             # Actions to tensor (B, L)
             actions_tensor_bl = torch.tensor(actions_list, dtype=torch.long, device=DEVICE).unsqueeze(1)
 
-            # 4. Train on batch
-            loss = model.train_on_batch(obs1_input_blchw, actions_tensor_bl, obs2_target_blchw, optimizer)
-            total_loss += loss
-
-            if step % PRINT_INTERVAL == 0:
-                avg_loss = total_loss / PRINT_INTERVAL
-                log_message = f"Step: {step}/{NUM_TRAINING_STEPS}, Average Loss: {avg_loss:.6f}"
-                print(log_message)
-
-            # if USE_MIXED_PRECISION and scaler:
-            #     with torch.cuda.amp.autocast():
-            #         _, predicted_obs2_raw = model(obs1_input_blchw, actions_tensor_bl)
-
-            #         # Compute loss
-            #         predicted_obs2 = predicted_obs2_raw.squeeze(1)
-            #         obs2_target = obs2_target_blchw.squeeze(1)
-
-            #         # Resize if necessary
-            #         if predicted_obs2.shape[2:] != obs2_target.shape[2:]:
-            #             predicted_obs2 = torch.nn.functional.interpolate(
-            #                 predicted_obs2, size=obs2_target.shape[2:],
-            #                 mode='bilinear', align_corners=False
-            #             )
-
-            #         loss = torch.nn.functional.mse_loss(predicted_obs2, obs2_target)
-            #         loss = loss / ACCUMULATION_STEPS  # Scale loss for accumulation
-
-            #     # Backward pass with scaling
-            #     scaler.scale(loss).backward()
-            #     accumulated_loss += loss.item()
-
-            # else:
-            #     # Standard precision training
-            #     _, predicted_obs2_raw = model(obs1_input_blchw, actions_tensor_bl)
-
-            #     predicted_obs2 = predicted_obs2_raw.squeeze(1)
-            #     obs2_target = obs2_target_blchw.squeeze(1)
-
-            #     if predicted_obs2.shape[2:] != obs2_target.shape[2:]:
-            #         predicted_obs2 = torch.nn.functional.interpolate(
-            #             predicted_obs2, size=obs2_target.shape[2:],
-            #             mode='bilinear', align_corners=False
-            #         )
-
-            #     loss = torch.nn.functional.mse_loss(predicted_obs2, obs2_target)
-            #     loss = loss / ACCUMULATION_STEPS
-
-            #     loss.backward()
-            #     accumulated_loss += loss.item()
-
-        # # 5. Optimizer step after accumulation
-        # if USE_MIXED_PRECISION and scaler:
-        #     # Gradient clipping
-        #     scaler.unscale_(optimizer)
-        #     torch.nn.utils.clip_grad_norm_(model.parameters(), GRADIENT_CLIP_NORM)
-
-        #     scaler.step(optimizer)
-        #     scaler.update()
-        # else:
-        #     torch.nn.utils.clip_grad_norm_(model.parameters(), GRADIENT_CLIP_NORM)
-        #     optimizer.step()
-
-        # optimizer.zero_grad()
-        # scheduler.step()
+            # 4. Call enhanced train_on_batch method with advanced training parameters
+            # Note: We need to modify the train_on_batch method to support these parameters
+            loss = model.train_on_batch_advanced(
+                obs1_input_blchw, 
+                actions_tensor_bl, 
+                obs2_target_blchw, 
+                optimizer,
+                scheduler=scheduler,
+                scaler=scaler,
+                use_mixed_precision=USE_MIXED_PRECISION,
+                gradient_clip_norm=GRADIENT_CLIP_NORM,
+                accumulation_steps=ACCUMULATION_STEPS,
+                is_accumulation_step=(acc_step < ACCUMULATION_STEPS - 1)
+            )
+            
+            accumulated_loss += loss
 
         # Record metrics
         total_loss += accumulated_loss
         step_time = time.time() - step_start_time
         step_times.append(step_time)
 
-        # Logging
+        # Logging (Based on train_attention.py style)
         if step % PRINT_INTERVAL == 0:
             avg_loss = total_loss / PRINT_INTERVAL
             avg_step_time = np.mean(step_times[-PRINT_INTERVAL:])
             current_lr = optimizer.param_groups[0]['lr']
 
-            print(f"Step: {step:5d}/{NUM_TRAINING_STEPS} | "
-                  f"Loss: {avg_loss:.6f} | "
-                  f"LR: {current_lr:.2e} | "
-                  f"Time: {avg_step_time:.3f}s/step")
+            log_message = (f"Step: {step:5d}/{NUM_TRAINING_STEPS} | "
+                          f"Loss: {avg_loss:.6f} | "
+                          f"LR: {current_lr:.2e} | "
+                          f"Time: {avg_step_time:.3f}s/step")
+            print(log_message)
 
             # TensorBoard logging
             writer.add_scalar('Loss/Train', avg_loss, step)
             writer.add_scalar('Learning_Rate', current_lr, step)
             writer.add_scalar('Time/Step', avg_step_time, step)
 
-            # Log to files
-            with open(os.path.join(LOG_DIR, 'training.log'), 'a') as f:
-                f.write(f"Step: {step}, Loss: {avg_loss:.6f}, LR: {current_lr:.2e}, Time: {avg_step_time:.3f}s\n")
+            # Save to CSV file (same style as train_attention.py)
+            with open('enhanced_loss.csv', 'a') as f:
+                if step == PRINT_INTERVAL:  # Write header if first entry
+                    f.write('step\taverage_loss\tlearning_rate\tstep_time\n')
+                f.write(f'{step}\t{avg_loss:.6f}\t{current_lr:.2e}\t{avg_step_time:.3f}\n')
+
+            # Save to log file (same style as train_attention.py)
+            with open('enhanced_training.log', 'a') as f:
+                f.write(log_message + '\n')
 
             # Update best loss
             if avg_loss < best_loss:
                 best_loss = avg_loss
                 save_checkpoint(model, optimizer, scheduler, scaler, step, avg_loss, MODEL_SAVE_DIR, is_best=True)
-                print(f"🎉 New best loss: {best_loss:.6f}")
+                best_log_message = f"🎉 New best loss: {best_loss:.6f}"
+                print(best_log_message)
+                with open('enhanced_training.log', 'a') as f:
+                    f.write(best_log_message + '\n')
 
             total_loss = 0
 
-        # Save checkpoint
+        # Save checkpoint (same style as train_attention.py)
         if step % SAVE_INTERVAL == 0:
             checkpoint_path = save_checkpoint(model, optimizer, scheduler, scaler, step, accumulated_loss,
                                               MODEL_SAVE_DIR)
-            print(f"💾 Saved checkpoint: {checkpoint_path}")
+            checkpoint_log_message = f"💾 Saved checkpoint: {checkpoint_path}"
+            print(checkpoint_log_message)
+            with open('enhanced_training.log', 'a') as f:
+                f.write(checkpoint_log_message + '\n')
 
     # --- Final Save ---
     final_checkpoint_path = save_checkpoint(model, optimizer, scheduler, scaler, NUM_TRAINING_STEPS, accumulated_loss,
@@ -354,8 +319,9 @@ def main():
     print(f" Total training steps: {NUM_TRAINING_STEPS:,}")
     print(f" Best loss achieved: {best_loss:.6f}")
     print(f" Average step time: {np.mean(step_times):.3f}s")
-    # print(f" Total parameters: {total_params:,}")
+    print(f" Total parameters: {total_params:,}")
     print(f" Architecture: Multi-head attention, Skip connections, SE blocks")
+    print(f" Logs saved to: enhanced_loss.csv, enhanced_training.log")
     print(" Enhanced model training completed successfully!")
 
 
