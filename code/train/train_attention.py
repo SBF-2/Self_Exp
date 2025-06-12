@@ -6,6 +6,7 @@ import os
 # Assuming PPM_attention.py and AtariEnv.py are in the same directory
 # or accessible in the Python path.
 from model.PPM_attention import PredictiveRepModel
+from model.PPM_attention2 import EnhancedPredictiveRepModel
 from env.AtariEnv_random import AtariEnvManager
 
 # --- Configuration ---

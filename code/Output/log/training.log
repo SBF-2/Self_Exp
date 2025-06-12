@@ -218,3 +218,5 @@ Step: 19800/20000, Average Loss: 45.562285
 Step: 19900/20000, Average Loss: 46.589505
 Step: 20000/20000, Average Loss: 48.009629
 Saved model checkpoint to trained_models_attention/ppm_attention_step_20000.pth
+Step: 100, Loss: 0.589351, LR: 1.00e-05, Time: 1.995s
+Step: 200, Loss: 0.155001, LR: 2.00e-05, Time: 2.109s
