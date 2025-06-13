@@ -1,0 +1,38 @@
+Validation Summary - enhanced_ppm_attention
+==================================================
+
+Model: EnhancedPredictiveRepModel
+Checkpoint: Output/checkpoint/enhanced_trained_models_attention/enhanced_ppm_attention_best.pth
+
+
+Environment: Seaquest-v4
+Samples: 25
+Best Loss: 1039.861206
+Worst Loss: 1087.890747
+Average Loss: 1061.783130
+Std Loss: 13.974168
+
+
+Environment: Riverraid-v4
+Samples: 25
+Best Loss: 3077.214844
+Worst Loss: 3484.375732
+Average Loss: 3282.305635
+Std Loss: 127.972872
+
+
+Environment: ChopperCommand-v4
+Samples: 25
+Best Loss: 2972.287598
+Worst Loss: 2985.880127
+Average Loss: 2978.761270
+Std Loss: 4.695180
+
+
+Environment: Breakout-v4
+Samples: 25
+Best Loss: 1403.273193
+Worst Loss: 1405.387329
+Average Loss: 1404.469927
+Std Loss: 0.616492
+

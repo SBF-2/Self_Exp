@@ -10,7 +10,7 @@ from env.AtariEnv_random import AtariEnvManager
 # --- Enhanced Configuration (Keeping original settings) ---
 # Environment parameters
 NUM_GAMES_TO_SELECT_FROM = 3  # Number of unique games to potentially use
-NUM_ENVS = 3  # Increased batch size for better training
+NUM_ENVS = 128  # Increased batch size for better training
 IMG_H, IMG_W, IMG_C = 210, 160, 3  # Standard Atari dimensions
 
 # Model parameters
@@ -25,12 +25,12 @@ USE_SKIP_CONNECTIONS = True  #可以跳过某些层直接传递
 # Enhanced Training parameters (Keeping original settings)
 LEARNING_RATE = 1e-4
 WEIGHT_DECAY = 1e-5     #正则化参数，用来防止模型过拟合
-NUM_TRAINING_STEPS = 200    #20000
+NUM_TRAINING_STEPS = 20000    #20000
 SEQ_LEN = 1  # Sequence length (model expects B, L, C, H, W)
 PRINT_INTERVAL = 100
-SAVE_INTERVAL = 1000
+SAVE_INTERVAL = 2000
 MODEL_SAVE_DIR = "Output/checkpoint/enhanced_trained_models_attention"
-LOG_DIR = "Output/log/Episode/enhanced_attention_logs"
+LOG_DIR = "Output/log/Episode2/enhanced_attention_logs"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Advanced training settings (Keeping original)
@@ -137,7 +137,7 @@ def main():
     os.makedirs(LOG_DIR, exist_ok=True)
 
     # Initialize TensorBoard writer
-    writer = SummaryWriter(log_dir=LOG_DIR)
+    # writer = SummaryWriter(log_dir=LOG_DIR)
 
     # --- Initialize Environment Manager ---
     print("\n Initializing Atari Environment Manager...")
@@ -204,7 +204,10 @@ def main():
     start_step = 1
 
     # Clean up old log files
-    log_files = ['enhanced_loss.csv', 'enhanced_training.log']
+    
+    csv_file = LOG_DIR + "/" + 'enhanced_loss.csv'
+    log_file = LOG_DIR + "/" + 'enhanced_training.log'
+    log_files = [ csv_file, log_file]
     for log_file in log_files:
         if os.path.exists(log_file):
             os.remove(log_file)
@@ -271,19 +274,19 @@ def main():
                           f"Time: {avg_step_time:.3f}s/step")
             print(log_message)
 
-            # TensorBoard logging
-            writer.add_scalar('Loss/Train', avg_loss, step)
-            writer.add_scalar('Learning_Rate', current_lr, step)
-            writer.add_scalar('Time/Step', avg_step_time, step)
+            # # TensorBoard logging
+            # writer.add_scalar('Loss/Train', avg_loss, step)
+            # writer.add_scalar('Learning_Rate', current_lr, step)
+            # writer.add_scalar('Time/Step', avg_step_time, step)
 
             # Save to CSV file (same style as train_attention.py)
-            with open('enhanced_loss.csv', 'a') as f:
+            with open(csv_file, 'a') as f:
                 if step == PRINT_INTERVAL:  # Write header if first entry
                     f.write('step\taverage_loss\tlearning_rate\tstep_time\n')
                 f.write(f'{step}\t{avg_loss:.6f}\t{current_lr:.2e}\t{avg_step_time:.3f}\n')
 
             # Save to log file (same style as train_attention.py)
-            with open('enhanced_training.log', 'a') as f:
+            with open(log_file, 'a') as f:
                 f.write(log_message + '\n')
 
             # Update best loss
@@ -292,7 +295,7 @@ def main():
                 save_checkpoint(model, optimizer, scheduler, scaler, step, avg_loss, MODEL_SAVE_DIR, is_best=True)
                 best_log_message = f"🎉 New best loss: {best_loss:.6f}"
                 print(best_log_message)
-                with open('enhanced_training.log', 'a') as f:
+                with open(log_file, 'a') as f:
                     f.write(best_log_message + '\n')
 
             total_loss = 0
@@ -303,7 +306,7 @@ def main():
                                               MODEL_SAVE_DIR)
             checkpoint_log_message = f"💾 Saved checkpoint: {checkpoint_path}"
             print(checkpoint_log_message)
-            with open('enhanced_training.log', 'a') as f:
+            with open(log_file, 'a') as f:
                 f.write(checkpoint_log_message + '\n')
 
     # --- Final Save ---
@@ -312,7 +315,7 @@ def main():
     print(f"✅ Training completed! Final checkpoint: {final_checkpoint_path}")
 
     # --- Cleanup ---
-    writer.close()
+    # writer.close()
     env_manager.close()
 
     print("\n=== Enhanced Training Summary ===")

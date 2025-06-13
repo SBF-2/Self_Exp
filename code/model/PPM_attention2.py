@@ -514,10 +514,10 @@ class EnhancedPredictiveRepModel(nn.Module):
         predicted_norm = (predicted_obs2_resized + 1) / 2.0
         target_norm = (obs2_target_for_loss_b_c_h_w + 1) / 2.0
         
-        print("predicted_obs2_resized: min =", predicted_obs2_resized.min().item(), ", max =", predicted_obs2_resized.max().item())
-        print("predicted_norm: min =", predicted_norm.min().item(), ", max =", predicted_norm.max().item())
-        print("obs2_target_for_loss_b_c_h_w: min =", obs2_target_for_loss_b_c_h_w.min().item(), ", max =", obs2_target_for_loss_b_c_h_w.max().item())
-        print("target_norm: min =", target_norm.min().item(), ", max =", target_norm.max().item())
+        # print("predicted_obs2_resized: min =", predicted_obs2_resized.min().item(), ", max =", predicted_obs2_resized.max().item())
+        # print("predicted_norm: min =", predicted_norm.min().item(), ", max =", predicted_norm.max().item())
+        # print("obs2_target_for_loss_b_c_h_w: min =", obs2_target_for_loss_b_c_h_w.min().item(), ", max =", obs2_target_for_loss_b_c_h_w.max().item())
+        # print("target_norm: min =", target_norm.min().item(), ", max =", target_norm.max().item())
         
         # 转换为灰度图像
         gray_weights = torch.tensor([0.2989, 0.5870, 0.1140],
@@ -682,11 +682,11 @@ class EnhancedPredictiveRepModel(nn.Module):
             predicted_norm = (predicted_obs2_resized + 1) / 2.0
             target_norm = (obs2_target_for_loss_b_c_h_w + 1) / 2.0
 
-            # Debug 输出
-            print("predicted_obs2_resized: min =", predicted_obs2_resized.min().item(), ", max =", predicted_obs2_resized.max().item())
-            print("predicted_norm: min =", predicted_norm.min().item(), ", max =", predicted_norm.max().item())
-            print("obs2_target_for_loss_b_c_h_w: min =", obs2_target_for_loss_b_c_h_w.min().item(), ", max =", obs2_target_for_loss_b_c_h_w.max().item())
-            print("target_norm: min =", target_norm.min().item(), ", max =", target_norm.max().item())
+            # # Debug 输出
+            # print("predicted_obs2_resized: min =", predicted_obs2_resized.min().item(), ", max =", predicted_obs2_resized.max().item())
+            # print("predicted_norm: min =", predicted_norm.min().item(), ", max =", predicted_norm.max().item())
+            # print("obs2_target_for_loss_b_c_h_w: min =", obs2_target_for_loss_b_c_h_w.min().item(), ", max =", obs2_target_for_loss_b_c_h_w.max().item())
+            # print("target_norm: min =", target_norm.min().item(), ", max =", target_norm.max().item())
 
             # 转换为灰度图像
             gray_weights = torch.tensor([0.2989, 0.5870, 0.1140],
