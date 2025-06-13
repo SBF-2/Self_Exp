@@ -73,7 +73,7 @@ MODEL_CONFIGS = {
             "num_attention_heads": 8,
             "use_skip_connections": True
         },
-        "checkpoint_path": "Output/checkpoint/enhanced_trained_models_attention/enhanced_ppm_attention_best.pth"
+        "checkpoint_path": "Output/checkpoint/enhanced_trained_models_attention/enhanced_ppm_attention_step_10000.pth"
     },
     
     # 可以继续添加其他模型配置...
@@ -246,19 +246,41 @@ def load_model_weights(model, checkpoint_path, device):
 # 辅助函数
 # =============================================================================
 
+# 文件: eval_standard.py
+
 def preprocess_observations(obs_list, device):
-    """将观测列表转换为模型输入格式"""
+    """将观测列表转换为模型输入格式，并归一化到 [-1, 1]"""
     processed_obs = []
     for obs_hwc in obs_list:
+        # 从 (H, W, C) 转换到 (C, H, W)
         obs_chw = np.transpose(obs_hwc, (2, 0, 1))
         processed_obs.append(obs_chw)
     
+    # 转换为float32张量
     obs_tensor_bchw = torch.tensor(np.array(processed_obs), dtype=torch.float32, device=device)
-    return obs_tensor_bchw
+    
+    # 归一化到 [-1, 1] 范围，以匹配模型的Tanh输出
+    normalized_tensor = (obs_tensor_bchw / 127.5) - 1.0
+    
+    return normalized_tensor
 
 def denormalize_image(img_tensor):
-    """将tensor转换为可显示格式"""
-    img_np = torch.clamp(img_tensor, 0, 255).cpu().numpy().astype(np.uint8)
+    """
+    将值域为 [-1, 1] 的tensor转换为可显示的 [0, 255] RGB图像格式。
+    """
+    # 1. 将值域从 [-1, 1] 映射到 [0, 1]
+    img_tensor_norm = (img_tensor.cpu().detach() + 1) / 2.0
+    
+    # 2. 将值域从 [0, 1] 映射到 [0, 255]
+    img_tensor_scaled = img_tensor_norm * 255.0
+    
+    # 3. 裁剪以确保值在 [0, 255] 范围内
+    img_tensor_clamped = torch.clamp(img_tensor_scaled, 0, 255)
+    
+    # 4. 转换为numpy数组并更改数据类型
+    img_np = img_tensor_clamped.numpy().astype(np.uint8)
+    
+    # 5. 将维度从 (C, H, W) 转换为 (H, W, C) 以便显示
     return np.transpose(img_np, (1, 2, 0))
 
 def create_comparison_image(input_img, real_img, pred_img, env_name, mse_loss, is_best=True):

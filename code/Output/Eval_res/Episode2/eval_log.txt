@@ -1,13 +1,13 @@
 ================================================================================
 通用模型验证详细日志
 ================================================================================
-验证开始时间: 2025-06-13 15:05:05
+验证开始时间: 2025-06-13 15:23:42
 使用设备: cpu
 当前模型: enhanced_ppm_attention
 模型类: EnhancedPredictiveRepModel
 验证步数: 100
 验证环境数量: 4
-模型路径: Output/checkpoint/enhanced_trained_models_attention/enhanced_ppm_attention_best.pth
+模型路径: Output/checkpoint/enhanced_trained_models_attention/enhanced_ppm_attention_step_10000.pth
 ================================================================================
 
 环境设置:
@@ -22,221 +22,225 @@
 --------------------------------------------------------------------------------
 
 开始验证环境: Seaquest-v4
-时间: 2025-06-13 15:05:06
+时间: 2025-06-13 15:23:42
 环境预热部署: 20
 ----------------------------------------
-Seaquest-v4: 预热结束，开始验证...Step   21: Action= 3, Reward=  0.00, Done=False, Loss=1039.861206
-Step   22: Action= 4, Reward=  0.00, Done=False, Loss=1041.296875
-Step   23: Action= 2, Reward=  0.00, Done=False, Loss=1044.203003
-Step   24: Action= 6, Reward=  0.00, Done=False, Loss=1044.467163
-Step   25: Action= 8, Reward=  0.00, Done=False, Loss=1045.518066
-Step   26: Action= 0, Reward=  0.00, Done=False, Loss=1045.823364
-Step   27: Action=11, Reward=  0.00, Done=False, Loss=1046.895142
-Step   28: Action= 6, Reward=  0.00, Done=False, Loss=1048.783569
-Step   29: Action= 1, Reward=  0.00, Done=False, Loss=1061.366943
-Step   30: Action= 7, Reward=  0.00, Done=False, Loss=1062.813354
-Step   31: Action= 2, Reward=  0.00, Done=False, Loss=1064.184692
-Step   32: Action= 7, Reward=  0.00, Done=False, Loss=1065.684082
-Step   33: Action=13, Reward=  0.00, Done=False, Loss=1058.744019
-Step   34: Action=13, Reward=  0.00, Done=False, Loss=1060.224487
-Step   35: Action= 8, Reward=  0.00, Done=False, Loss=1062.716064
-Step   36: Action=10, Reward=  0.00, Done=False, Loss=1064.149292
-Step   37: Action=17, Reward=  0.00, Done=False, Loss=1065.593262
-Step   38: Action=13, Reward=  0.00, Done=False, Loss=1067.388428
-Step   39: Action=17, Reward=  0.00, Done=False, Loss=1070.293335
-Step   40: Action=13, Reward=  0.00, Done=False, Loss=1074.315186
-Step   41: Action=16, Reward=  0.00, Done=False, Loss=1075.774658
-Step   42: Action= 1, Reward=  0.00, Done=False, Loss=1078.667603
-Step   43: Action= 6, Reward=  0.00, Done=False, Loss=1083.309204
-Step   44: Action=12, Reward=  0.00, Done=False, Loss=1084.614502
-Step   45: Action=15, Reward=  0.00, Done=False, Loss=1087.890747
+Seaquest-v4: 预热结束，开始验证...
+Step   21: Action=11, Reward=  0.00, Done=False, Loss=1049.621826
+Step   22: Action=17, Reward=  0.00, Done=False, Loss=1046.415283
+Step   23: Action=10, Reward=  0.00, Done=False, Loss=1047.898804
+Step   24: Action= 9, Reward=  0.00, Done=False, Loss=1049.795532
+Step   25: Action=15, Reward=  0.00, Done=False, Loss=1049.554810
+Step   26: Action= 8, Reward=  0.00, Done=False, Loss=1052.844482
+Step   27: Action=12, Reward=  0.00, Done=False, Loss=1050.695312
+Step   28: Action=16, Reward=  0.00, Done=False, Loss=1054.136230
+Step   29: Action= 3, Reward=  0.00, Done=False, Loss=1055.625732
+Step   30: Action=11, Reward=  0.00, Done=False, Loss=1069.471191
+Step   31: Action= 1, Reward=  0.00, Done=False, Loss=1070.709473
+Step   32: Action=17, Reward=  0.00, Done=False, Loss=1072.181274
+Step   33: Action= 2, Reward=  0.00, Done=False, Loss=1064.965698
+Step   34: Action= 5, Reward=  0.00, Done=False, Loss=1067.906616
+Step   35: Action=16, Reward=  0.00, Done=False, Loss=1068.810059
+Step   36: Action=16, Reward=  0.00, Done=False, Loss=1070.420532
+Step   37: Action= 9, Reward=  0.00, Done=False, Loss=1072.580811
+Step   38: Action= 2, Reward=  0.00, Done=False, Loss=1076.466919
+Step   39: Action=15, Reward=  0.00, Done=False, Loss=1080.805908
+Step   40: Action=14, Reward=  0.00, Done=False, Loss=1083.692261
+Step   41: Action=15, Reward=  0.00, Done=False, Loss=1086.657471
+Step   42: Action=17, Reward=  0.00, Done=False, Loss=1091.142822
+Step   43: Action= 3, Reward=  0.00, Done=False, Loss=1092.321411
+Step   44: Action= 2, Reward=  0.00, Done=False, Loss=1099.620117
+Step   45: Action=10, Reward=  0.00, Done=False, Loss=1099.634399
 
 Seaquest-v4 验证完成:
   总样本数: 25
-  平均损失: 1061.783130
-  最小损失: 1039.861206
-  最大损失: 1087.890747
-  标准差: 13.974168
+  平均损失: 1068.958999
+  最小损失: 1046.415283
+  最大损失: 1099.634399
+  标准差: 16.434402
 ========================================
 
 开始验证环境: Riverraid-v4
-时间: 2025-06-13 15:05:10
+时间: 2025-06-13 15:23:46
 环境预热部署: 20
 ----------------------------------------
-Riverraid-v4: 预热结束，开始验证...Step   21: Action= 0, Reward=  0.00, Done=False, Loss=3484.375732
-Step   22: Action=16, Reward=  0.00, Done=False, Loss=3467.701904
-Step   23: Action=16, Reward=  0.00, Done=False, Loss=3446.555664
-Step   24: Action=15, Reward=  0.00, Done=False, Loss=3415.336914
-Step   25: Action= 3, Reward=  0.00, Done=False, Loss=3383.955322
-Step   26: Action=13, Reward=  0.00, Done=False, Loss=3362.188232
-Step   27: Action= 6, Reward=  0.00, Done=False, Loss=3364.388672
-Step   28: Action= 3, Reward=  0.00, Done=False, Loss=3357.960693
-Step   29: Action= 8, Reward=  0.00, Done=False, Loss=3361.597656
-Step   30: Action=14, Reward=  0.00, Done=False, Loss=3372.422852
-Step   31: Action= 3, Reward=  0.00, Done=False, Loss=3358.308594
-Step   32: Action=16, Reward=  0.00, Done=False, Loss=3346.004639
-Step   33: Action= 5, Reward= 30.00, Done=False, Loss=3322.229980
-Step   34: Action= 5, Reward=  0.00, Done=False, Loss=3311.531494
-Step   35: Action=10, Reward=  0.00, Done=False, Loss=3284.567139
-Step   36: Action= 5, Reward=  0.00, Done=False, Loss=3269.660889
-Step   37: Action= 3, Reward=  0.00, Done=False, Loss=3199.091064
-Step   38: Action=17, Reward=  0.00, Done=False, Loss=3184.136719
-Step   39: Action= 2, Reward=  0.00, Done=False, Loss=3174.495605
-Step   40: Action=15, Reward=  0.00, Done=False, Loss=3134.062500
-Step   41: Action= 8, Reward=  0.00, Done=False, Loss=3120.676025
-Step   42: Action= 6, Reward= 80.00, Done=False, Loss=3083.851562
-Step   43: Action=16, Reward=  0.00, Done=False, Loss=3085.056152
-Step   44: Action= 2, Reward=  0.00, Done=False, Loss=3090.270020
-Step   45: Action=16, Reward=  0.00, Done=False, Loss=3077.214844
+Riverraid-v4: 预热结束，开始验证...
+Step   21: Action=13, Reward=  0.00, Done=False, Loss=3453.053223
+Step   22: Action= 7, Reward=  0.00, Done=False, Loss=3436.183105
+Step   23: Action= 8, Reward=  0.00, Done=False, Loss=3413.103271
+Step   24: Action=17, Reward=  0.00, Done=False, Loss=3380.531494
+Step   25: Action= 0, Reward=  0.00, Done=False, Loss=3383.963379
+Step   26: Action= 9, Reward=  0.00, Done=False, Loss=3379.957520
+Step   27: Action= 8, Reward=  0.00, Done=False, Loss=3373.214111
+Step   28: Action= 0, Reward=  0.00, Done=False, Loss=3376.076660
+Step   29: Action=17, Reward=  0.00, Done=False, Loss=3381.686768
+Step   30: Action= 3, Reward=  0.00, Done=False, Loss=3369.354248
+Step   31: Action=14, Reward=  0.00, Done=False, Loss=3354.604004
+Step   32: Action= 7, Reward= 30.00, Done=False, Loss=3333.186279
+Step   33: Action=17, Reward=  0.00, Done=False, Loss=3309.792969
+Step   34: Action= 5, Reward=  0.00, Done=False, Loss=3284.304199
+Step   35: Action= 0, Reward=  0.00, Done=False, Loss=3251.401367
+Step   36: Action=13, Reward=  0.00, Done=False, Loss=3213.845459
+Step   37: Action=14, Reward=  0.00, Done=False, Loss=3186.742920
+Step   38: Action=16, Reward=  0.00, Done=False, Loss=3162.141602
+Step   39: Action=13, Reward=  0.00, Done=False, Loss=3149.660400
+Step   40: Action=12, Reward=  0.00, Done=False, Loss=3117.750000
+Step   41: Action= 0, Reward=  0.00, Done=False, Loss=3128.282715
+Step   42: Action=10, Reward=  0.00, Done=False, Loss=3121.969482
+Step   43: Action= 1, Reward=  0.00, Done=False, Loss=3116.547363
+Step   44: Action= 0, Reward=  0.00, Done=False, Loss=3105.713867
+Step   45: Action=17, Reward=  0.00, Done=False, Loss=3090.927979
 
 Riverraid-v4 验证完成:
   总样本数: 25
-  平均损失: 3282.305635
-  最小损失: 3077.214844
-  最大损失: 3484.375732
-  标准差: 127.972872
+  平均损失: 3274.959775
+  最小损失: 3090.927979
+  最大损失: 3453.053223
+  标准差: 119.966794
 ========================================
 
 开始验证环境: ChopperCommand-v4
-时间: 2025-06-13 15:05:14
+时间: 2025-06-13 15:23:50
 环境预热部署: 20
 ----------------------------------------
-ChopperCommand-v4: 预热结束，开始验证...Step   21: Action=13, Reward=  0.00, Done=False, Loss=2974.127441
-Step   22: Action= 4, Reward=  0.00, Done=False, Loss=2972.963379
-Step   23: Action= 6, Reward=  0.00, Done=False, Loss=2973.916748
-Step   24: Action=10, Reward=  0.00, Done=False, Loss=2972.458984
-Step   25: Action= 0, Reward=  0.00, Done=False, Loss=2972.287598
-Step   26: Action= 3, Reward=  0.00, Done=False, Loss=2974.523682
-Step   27: Action=13, Reward=  0.00, Done=False, Loss=2973.615479
-Step   28: Action=16, Reward=  0.00, Done=False, Loss=2973.033447
-Step   29: Action=14, Reward=  0.00, Done=False, Loss=2976.566650
-Step   30: Action= 0, Reward=  0.00, Done=False, Loss=2973.257812
-Step   31: Action=10, Reward=  0.00, Done=False, Loss=2974.588623
-Step   32: Action=11, Reward=100.00, Done=False, Loss=2983.005127
-Step   33: Action= 4, Reward=  0.00, Done=False, Loss=2984.086670
-Step   34: Action= 3, Reward=  0.00, Done=False, Loss=2982.826172
-Step   35: Action=15, Reward=  0.00, Done=False, Loss=2978.302490
-Step   36: Action= 1, Reward=  0.00, Done=False, Loss=2982.190430
-Step   37: Action= 0, Reward=  0.00, Done=False, Loss=2984.297119
-Step   38: Action=17, Reward=  0.00, Done=False, Loss=2982.383789
-Step   39: Action=17, Reward=  0.00, Done=False, Loss=2983.739990
-Step   40: Action= 7, Reward=  0.00, Done=False, Loss=2985.880127
-Step   41: Action= 9, Reward=  0.00, Done=False, Loss=2980.755371
-Step   42: Action=14, Reward=  0.00, Done=False, Loss=2980.691162
-Step   43: Action= 5, Reward=  0.00, Done=False, Loss=2982.619873
-Step   44: Action=16, Reward=  0.00, Done=False, Loss=2983.014648
-Step   45: Action= 0, Reward=  0.00, Done=False, Loss=2983.898926
+ChopperCommand-v4: 预热结束，开始验证...
+Step   21: Action= 5, Reward=  0.00, Done=False, Loss=2990.734375
+Step   22: Action= 9, Reward=  0.00, Done=False, Loss=2990.430420
+Step   23: Action= 6, Reward=  0.00, Done=False, Loss=2989.905273
+Step   24: Action=16, Reward=  0.00, Done=False, Loss=2989.913574
+Step   25: Action=12, Reward=  0.00, Done=False, Loss=2990.237305
+Step   26: Action=10, Reward=  0.00, Done=False, Loss=2990.506592
+Step   27: Action=12, Reward=  0.00, Done=False, Loss=2991.780762
+Step   28: Action= 9, Reward=  0.00, Done=False, Loss=2990.675781
+Step   29: Action=11, Reward=  0.00, Done=False, Loss=2990.390381
+Step   30: Action=12, Reward=  0.00, Done=False, Loss=2987.858398
+Step   31: Action= 6, Reward=  0.00, Done=False, Loss=2985.927002
+Step   32: Action=15, Reward=100.00, Done=False, Loss=2995.207031
+Step   33: Action= 5, Reward=  0.00, Done=False, Loss=2997.257080
+Step   34: Action= 7, Reward=  0.00, Done=False, Loss=2999.995605
+Step   35: Action= 9, Reward=  0.00, Done=False, Loss=2998.319092
+Step   36: Action= 2, Reward=  0.00, Done=False, Loss=2997.920410
+Step   37: Action= 0, Reward=  0.00, Done=False, Loss=2997.556641
+Step   38: Action=10, Reward=  0.00, Done=False, Loss=2993.961426
+Step   39: Action= 5, Reward=  0.00, Done=False, Loss=2997.118408
+Step   40: Action=10, Reward=  0.00, Done=False, Loss=2998.305420
+Step   41: Action= 2, Reward=  0.00, Done=False, Loss=2998.027588
+Step   42: Action= 9, Reward=  0.00, Done=False, Loss=2998.352783
+Step   43: Action= 6, Reward=  0.00, Done=False, Loss=2997.661133
+Step   44: Action=12, Reward=  0.00, Done=False, Loss=2993.905273
+Step   45: Action=15, Reward=  0.00, Done=False, Loss=2993.105225
 
 ChopperCommand-v4 验证完成:
   总样本数: 25
-  平均损失: 2978.761270
-  最小损失: 2972.287598
-  最大损失: 2985.880127
-  标准差: 4.695180
+  平均损失: 2993.802119
+  最小损失: 2985.927002
+  最大损失: 2999.995605
+  标准差: 3.931834
 ========================================
 
 开始验证环境: Breakout-v4
-时间: 2025-06-13 15:05:18
+时间: 2025-06-13 15:23:54
 环境预热部署: 20
 ----------------------------------------
-Breakout-v4: 预热结束，开始验证...Step   21: Action= 1, Reward=  0.00, Done=False, Loss=1403.507202
-Step   22: Action= 3, Reward=  0.00, Done=False, Loss=1403.625488
-Step   23: Action= 1, Reward=  0.00, Done=False, Loss=1404.189575
-Step   24: Action= 3, Reward=  0.00, Done=False, Loss=1404.756470
-Step   25: Action= 0, Reward=  0.00, Done=False, Loss=1405.377441
-Step   26: Action= 2, Reward=  0.00, Done=False, Loss=1403.702148
-Step   27: Action= 0, Reward=  0.00, Done=False, Loss=1404.239136
-Step   28: Action= 3, Reward=  0.00, Done=False, Loss=1404.221680
-Step   29: Action= 3, Reward=  0.00, Done=False, Loss=1404.623047
-Step   30: Action= 2, Reward=  0.00, Done=False, Loss=1404.057129
-Step   31: Action= 1, Reward=  0.00, Done=False, Loss=1405.114502
-Step   32: Action= 3, Reward=  0.00, Done=False, Loss=1404.401978
-Step   33: Action= 3, Reward=  0.00, Done=False, Loss=1405.277588
-Step   34: Action= 1, Reward=  0.00, Done=False, Loss=1405.387329
-Step   35: Action= 2, Reward=  0.00, Done=False, Loss=1404.642822
-Step   36: Action= 3, Reward=  0.00, Done=False, Loss=1405.018677
-Step   37: Action= 1, Reward=  0.00, Done=False, Loss=1404.902466
-Step   38: Action= 1, Reward=  0.00, Done=False, Loss=1404.146362
-Step   39: Action= 2, Reward=  0.00, Done=False, Loss=1403.904053
-Step   40: Action= 0, Reward=  0.00, Done=False, Loss=1404.655029
-Step   41: Action= 3, Reward=  0.00, Done=False, Loss=1405.116455
-Step   42: Action= 3, Reward=  0.00, Done=False, Loss=1405.313110
-Step   43: Action= 3, Reward=  0.00, Done=False, Loss=1404.546997
-Step   44: Action= 0, Reward=  0.00, Done=False, Loss=1403.748291
-Step   45: Action= 1, Reward=  0.00, Done=False, Loss=1403.273193
+Breakout-v4: 预热结束，开始验证...
+Step   21: Action= 3, Reward=  0.00, Done=False, Loss=1412.434082
+Step   22: Action= 2, Reward=  0.00, Done=False, Loss=1412.457397
+Step   23: Action= 0, Reward=  0.00, Done=False, Loss=1412.424316
+Step   24: Action= 1, Reward=  0.00, Done=False, Loss=1412.329346
+Step   25: Action= 2, Reward=  0.00, Done=False, Loss=1412.213623
+Step   26: Action= 1, Reward=  0.00, Done=False, Loss=1412.387695
+Step   27: Action= 0, Reward=  0.00, Done=False, Loss=1412.431763
+Step   28: Action= 1, Reward=  0.00, Done=False, Loss=1411.543823
+Step   29: Action= 3, Reward=  0.00, Done=False, Loss=1411.751831
+Step   30: Action= 1, Reward=  0.00, Done=False, Loss=1411.570312
+Step   31: Action= 0, Reward=  0.00, Done=False, Loss=1411.660034
+Step   32: Action= 1, Reward=  0.00, Done=False, Loss=1411.785278
+Step   33: Action= 3, Reward=  0.00, Done=False, Loss=1411.784790
+Step   34: Action= 1, Reward=  0.00, Done=False, Loss=1411.794800
+Step   35: Action= 3, Reward=  0.00, Done=False, Loss=1411.527466
+Step   36: Action= 3, Reward=  0.00, Done=False, Loss=1409.358398
+Step   37: Action= 3, Reward=  0.00, Done=False, Loss=1409.039551
+Step   38: Action= 0, Reward=  0.00, Done=False, Loss=1409.329102
+Step   39: Action= 3, Reward=  0.00, Done=False, Loss=1409.294434
+Step   40: Action= 2, Reward=  0.00, Done=False, Loss=1409.319702
+Step   41: Action= 3, Reward=  0.00, Done=False, Loss=1409.237427
+Step   42: Action= 3, Reward=  0.00, Done=False, Loss=1409.290527
+Step   43: Action= 3, Reward=  0.00, Done=False, Loss=1409.186890
+Step   44: Action= 2, Reward=  0.00, Done=False, Loss=1409.189575
+Step   45: Action= 1, Reward=  0.00, Done=False, Loss=1409.979248
 
 Breakout-v4 验证完成:
   总样本数: 25
-  平均损失: 1404.469927
-  最小损失: 1403.273193
-  最大损失: 1405.387329
-  标准差: 0.616492
+  平均损失: 1410.932856
+  最小损失: 1409.039551
+  最大损失: 1412.457397
+  标准差: 1.353145
 ========================================
 
 开始生成对比图像...
-时间: 2025-06-13 15:05:22
+时间: 2025-06-13 15:23:58
 ------------------------------------------------------------
 处理环境: Seaquest-v4
   总样本数: 25
-  最佳4个样本损失范围: 1039.861206 - 1044.467163
-  最差4个样本损失范围: 1078.667603 - 1087.890747
+  最佳4个样本损失范围: 1046.415283 - 1049.621826
+  最差4个样本损失范围: 1091.142822 - 1099.634399
   保存最佳4个结果:
-    best_1: loss=1039.861206, action=3
-    best_2: loss=1041.296875, action=4
-    best_3: loss=1044.203003, action=2
-    best_4: loss=1044.467163, action=6
+    best_1: loss=1046.415283, action=17
+    best_2: loss=1047.898804, action=10
+    best_3: loss=1049.554810, action=15
+    best_4: loss=1049.621826, action=11
   保存最差4个结果:
-    worst_1: loss=1078.667603, action=1
-    worst_2: loss=1083.309204, action=6
-    worst_3: loss=1084.614502, action=12
-    worst_4: loss=1087.890747, action=15
+    worst_1: loss=1091.142822, action=17
+    worst_2: loss=1092.321411, action=3
+    worst_3: loss=1099.620117, action=2
+    worst_4: loss=1099.634399, action=10
   Seaquest-v4 图像保存完成
 ----------------------------------------
 处理环境: Riverraid-v4
   总样本数: 25
-  最佳4个样本损失范围: 3077.214844 - 3090.270020
-  最差4个样本损失范围: 3415.336914 - 3484.375732
+  最佳4个样本损失范围: 3090.927979 - 3117.750000
+  最差4个样本损失范围: 3383.963379 - 3453.053223
   保存最佳4个结果:
-    best_1: loss=3077.214844, action=16
-    best_2: loss=3083.851562, action=6
-    best_3: loss=3085.056152, action=16
-    best_4: loss=3090.270020, action=2
+    best_1: loss=3090.927979, action=17
+    best_2: loss=3105.713867, action=0
+    best_3: loss=3116.547363, action=1
+    best_4: loss=3117.750000, action=12
   保存最差4个结果:
-    worst_1: loss=3415.336914, action=15
-    worst_2: loss=3446.555664, action=16
-    worst_3: loss=3467.701904, action=16
-    worst_4: loss=3484.375732, action=0
+    worst_1: loss=3383.963379, action=0
+    worst_2: loss=3413.103271, action=8
+    worst_3: loss=3436.183105, action=7
+    worst_4: loss=3453.053223, action=13
   Riverraid-v4 图像保存完成
 ----------------------------------------
 处理环境: ChopperCommand-v4
   总样本数: 25
-  最佳4个样本损失范围: 2972.287598 - 2973.033447
-  最差4个样本损失范围: 2983.898926 - 2985.880127
+  最佳4个样本损失范围: 2985.927002 - 2989.913574
+  最差4个样本损失范围: 2998.305420 - 2999.995605
   保存最佳4个结果:
-    best_1: loss=2972.287598, action=0
-    best_2: loss=2972.458984, action=10
-    best_3: loss=2972.963379, action=4
-    best_4: loss=2973.033447, action=16
+    best_1: loss=2985.927002, action=6
+    best_2: loss=2987.858398, action=12
+    best_3: loss=2989.905273, action=6
+    best_4: loss=2989.913574, action=16
   保存最差4个结果:
-    worst_1: loss=2983.898926, action=0
-    worst_2: loss=2984.086670, action=4
-    worst_3: loss=2984.297119, action=0
-    worst_4: loss=2985.880127, action=7
+    worst_1: loss=2998.305420, action=10
+    worst_2: loss=2998.319092, action=9
+    worst_3: loss=2998.352783, action=9
+    worst_4: loss=2999.995605, action=7
   ChopperCommand-v4 图像保存完成
 ----------------------------------------
 处理环境: Breakout-v4
   总样本数: 25
-  最佳4个样本损失范围: 1403.273193 - 1403.702148
-  最差4个样本损失范围: 1405.277588 - 1405.387329
+  最佳4个样本损失范围: 1409.039551 - 1409.237427
+  最差4个样本损失范围: 1412.424316 - 1412.457397
   保存最佳4个结果:
-    best_1: loss=1403.273193, action=1
-    best_2: loss=1403.507202, action=1
-    best_3: loss=1403.625488, action=3
-    best_4: loss=1403.702148, action=2
+    best_1: loss=1409.039551, action=3
+    best_2: loss=1409.186890, action=3
+    best_3: loss=1409.189575, action=2
+    best_4: loss=1409.237427, action=3
   保存最差4个结果:
-    worst_1: loss=1405.277588, action=3
-    worst_2: loss=1405.313110, action=3
-    worst_3: loss=1405.377441, action=0
-    worst_4: loss=1405.387329, action=1
+    worst_1: loss=1412.424316, action=0
+    worst_2: loss=1412.431763, action=0
+    worst_3: loss=1412.434082, action=3
+    worst_4: loss=1412.457397, action=2
   Breakout-v4 图像保存完成
 ----------------------------------------
