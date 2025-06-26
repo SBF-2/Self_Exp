@@ -1,0 +1,2 @@
+CUDA_VISIBLE_DEVICES=0,2,4,6 python -m torch.distributed.launch --nproc_per_node=4 train_PRM.py --sequence-length 32 --batch-size 4 --overlap-steps 32 --run-name episode3 --epochs 50
+python train_PRM.py --sequence-length 16 --batch-size 4 --overlap-steps 4 --run-name episode3 --epochs 1

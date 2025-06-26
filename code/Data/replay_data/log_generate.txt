@@ -1,6 +1,0 @@
-2025-06-14 23:20:04,291 - INFO - 程序启动
-2025-06-14 23:20:04,291 - INFO - 选择的模式: generate
-2025-06-14 23:20:04,291 - INFO - 基本游戏信息: 使用默认游戏列表
-2025-06-14 23:20:04,291 - INFO - 最终配置: {'mode': 'generate', 'num_plats': 1, 'num_episodes_every_plat': 1, 'game_ratios': None, 'games': None, 'render_mode': 'rgb_array', 'save_dir': '/Users/feisong/Desktop/self-experience/code/Data/replay_data', 'window_size': 512, 'stride': 256, 'input_file': None, 'output_file': '/Users/feisong/Desktop/self-experience/code/Data/processed_data', 'seed': None, 'verbose': False, 'config': None}
-2025-06-14 23:20:04,291 - INFO - 当前时间: 2025-06-14 23:20:04
-2025-06-14 23:20:04,291 - INFO - 配置文件信息: 未提供配置文件

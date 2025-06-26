@@ -1,23 +1,32 @@
 import pandas as pd
-
 import matplotlib.pyplot as plt
 
-# Read the CSV file
-df = pd.read_csv('/Users/feisong/Desktop/modeltrain/modeltraining/code/log/train_loss.csv')
+# 加载CSV文件
+file_path = 'Output/loss_log.csv'  # 替换为你的文件路径
+data = pd.read_csv(file_path)
 
-# Create the plot
-plt.figure(figsize=(10, 6))
-if df.shape[1] >= 2:  # Ensure there are at least two columns
-	plt.plot(df.iloc[:, 0], df.iloc[:, 1], 'b-', linewidth=1)
-else:
-	raise ValueError("The CSV file does not have enough columns for plotting.")
+# 只选择 mode 列内容为 "eval" 的数据
+eval_data = data[data['mode'] == 'eval']
 
-# Customize the plot
-plt.title('Training Loss Over Steps')
-plt.xlabel('Steps')
-plt.ylabel('Average Loss')
+# 提取需要绘制的损失列
+loss_columns = ['total_loss', 'loss_img', 'loss_done', 'loss_vector']
+steps = eval_data['global_step']
+
+# 创建一个绘图
+plt.figure(figsize=(16, 10))
+
+# 为每个损失列绘制曲线
+for loss in loss_columns[:2]:
+	plt.plot(steps, eval_data[loss], label=loss)
+
+# 添加标签和标题
+plt.xlabel('Global Step')
+plt.ylabel('Loss')
+plt.title('Loss Curves')
+plt.legend(title='Loss Types')
+
+# 显示网格
 plt.grid(True)
 
-# Save the plot
-plt.savefig('training_loss_plot.png')
-plt.close()
+# 展示图形
+plt.show()
