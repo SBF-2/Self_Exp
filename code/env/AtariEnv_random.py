@@ -150,7 +150,7 @@ if __name__ == '__main__':
     # 示例用法:
     num_parallel_envs = 5  # 并行环境数量
     num_games = 3  # 要随机选择的游戏数量
-    num_steps = 100  # 模拟步数
+    num_steps = 1000  # 模拟步数
     
     # 创建环境管理器，随机选择3个游戏
     env_manager = AtariEnvManager(num_games=num_games, num_envs=num_parallel_envs, render_mode='human')
